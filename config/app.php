@@ -228,4 +228,21 @@ return [
 
     ],
 
+    'type' => [
+        0 => [
+            'name' => 'PHP',
+            'img' => '',
+            'children' => [
+                0 => 'thinkPhp',
+                1 => 'laravel'
+            ]
+        ],
+        1 => [
+            'name' => 'PYTHON',
+            'img' => '',
+            'children' => [
+                0 => '爬虫'
+            ]
+        ]
+    ]
 ];
