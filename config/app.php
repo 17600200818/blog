@@ -233,16 +233,73 @@ return [
             'name' => 'PHP',
             'img' => '',
             'children' => [
-                0 => 'thinkPhp',
-                1 => 'laravel'
+                0 => 'PHP',
+                1 => 'thinkPhp',
+                2 => 'Laravel'
             ]
         ],
         1 => [
+            'name' => 'Linux',
+            'img' => '',
+            'children' => [
+                0 => 'Linux',
+            ]
+        ],
+        2 => [
+            'name' => 'MYSQL',
+            'img' => '',
+            'children' => [
+                0 => 'MYSQL'
+            ]
+        ],
+        3 => [
+            'name' => 'Apache',
+            'img' => '',
+            'children' => [
+                0 => 'Apache',
+            ]
+        ],
+        4 => [
+            'name' => 'Nginx',
+            'img' => '',
+            'children' => [
+                0 => 'Nginx',
+            ]
+        ],
+        5 => [
+            'name' => 'JAVASCRIPT',
+            'img' => '',
+            'children' => [
+                0 => 'js',
+                1 => 'jQuery',
+                2 => 'Vue.js',
+            ]
+        ],
+        6 => [
+            'name' => 'HTML5',
+            'img' => '',
+            'children' => [
+                0 => 'HTML5',
+                0 => 'CSS3'
+            ]
+        ],
+        7 => [
             'name' => 'PYTHON',
             'img' => '',
             'children' => [
                 0 => '爬虫'
             ]
-        ]
+        ],
+        8 => [
+            'name' => '日常',
+            'img' => '',
+            'children' => [
+                0 => '记录',
+                1 => '感悟',
+                2 => '吐槽',
+                3 => '健身',
+                4 => '游戏',
+            ]
+        ],
     ]
 ];

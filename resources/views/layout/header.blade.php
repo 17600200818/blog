@@ -2,13 +2,9 @@
     <h1><a href="{{ route('index') }}">YTY</a></h1>
     <nav class="links">
         <ul>
-            <li><a href="#">laravel</a></li>
-            <li><a href="#">python</a></li>
-            <li><a href="#">linux</a></li>
-            <li><a href="#">mysql</a></li>
-            <li><a href="#">nginx</a></li>
-            <li><a href="#">daily</a></li>
-            <li><a href="#">game</a></li>
+            @foreach( config('app.type') as $type )
+            <li><a href="#">{{ $type['name'] }}</a></li>
+            @endforeach
         </ul>
     </nav>
     <nav class="main">
