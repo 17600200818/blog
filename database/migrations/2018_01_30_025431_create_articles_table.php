@@ -11,9 +11,11 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->string('title')->index();
             $table->text('body');
-            $table->string('type');
+            $table->integer('type1');
+            $table->integer('type2');
             $table->string('description');
             $table->string('images')->nullable();
+            $table->integer('is_good')->default(0);
             $table->integer('thumbs_up')->default(0);
             $table->timestamps();
         });

@@ -13,3 +13,4 @@
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::resource('articles', 'ArticlesController');
+Route::post('upload_image', 'ArticlesController@uploadImage')->name('articles.upload_image');

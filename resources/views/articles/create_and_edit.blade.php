@@ -1,64 +1,88 @@
-@extends('layouts.app')
+@extends('layout.app')
+@section('body_class', 'signle')
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+@stop
+@section('scripts')
+    <script type="text/javascript"  src="{{ asset('js/module.js') }}"></script>
+    <script type="text/javascript"  src="{{ asset('js/hotkeys.js') }}"></script>
+    <script type="text/javascript"  src="{{ asset('js/uploader.js') }}"></script>
+    <script type="text/javascript"  src="{{ asset('js/simditor.js') }}"></script>
 
+    <script>
+        $(document).ready(function(){
+            var editor = new Simditor({
+                textarea: $('#editor'),
+                upload: {
+                    url: '{{ route('articles.upload_image') }}',
+                    params: { _token: '{{ csrf_token() }}' },
+                    fileKey: 'upload_file',
+                    connectionCount: 3,
+                    leaveConfirm: '文件上传中，关闭此页面将取消上传。'
+                },
+                pasteImage: true,
+            });
+        });
+    </script>
+
+@stop
 @section('content')
+    <!-- Main -->
+    <div id="main">
 
-<div class="container">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            
-            <div class="panel-heading">
-                <h1>
-                    <i class="glyphicon glyphicon-edit"></i> Article /
-                    @if($article->id)
-                        Edit #{{$article->id}}
-                    @else
-                        Create
-                    @endif
-                </h1>
-            </div>
-
-            @include('common.error')
-
-            <div class="panel-body">
-                @if($article->id)
-                    <form action="{{ route('articles.update', $article->id) }}" method="POST" accept-charset="UTF-8">
-                        <input type="hidden" name="_method" value="PUT">
-                @else
-                    <form action="{{ route('articles.store') }}" method="POST" accept-charset="UTF-8">
-                @endif
-
+        <!-- Post -->
+        <article class="post">
+            <section>
+                <h3>Form</h3>
+                <form method="POST" action="{{ route('articles.store') }}" accept-charset="UTF-8">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="row uniform">
+                        <div class="12u$">
+                            <input type="text" name="title" id="demo-name" value="{{ old('title') }}" placeholder="标题" />
+                        </div>
+                        <div class="12u$">
+                            <ul class="actions fit">
+                                <li>
+                                    <select name="type1" id="demo-category">
+                                        @foreach(config('app.type') as $k => $v)
+                                            <option value="{{ $k }}">{{ $v['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </li>
+                                <li>
+                                    <select name="type2" id="demo-category">
+                                        @foreach(config('app.type') as $k => $v)
+                                            @foreach($v['children'] as $kk => $vv)
+                                                <option value="{{ $kk }}">{{ $vv }}</option>
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                </li>
+                                <li>
+                                    <select name="is_good" id="demo-category">
+                                        <option value="0">normal</option>
+                                        <option value="1">good</option>
+                                    </select>
+                                </li>
 
-                    
-                <div class="form-group">
-                	<label for="title-field">Title</label>
-                	<input class="form-control" type="text" name="title" id="title-field" value="{{ old('title', $article->title ) }}" />
-                </div> 
-                <div class="form-group">
-                    <label for="type_id-field">Type_id</label>
-                    <input class="form-control" type="text" name="type_id" id="type_id-field" value="{{ old('type_id', $article->type_id ) }}" />
-                </div> 
-                <div class="form-group">
-                	<label for="description-field">Description</label>
-                	<input class="form-control" type="text" name="description" id="description-field" value="{{ old('description', $article->description ) }}" />
-                </div> 
-                <div class="form-group">
-                	<label for="images-field">Images</label>
-                	<input class="form-control" type="text" name="images" id="images-field" value="{{ old('images', $article->images ) }}" />
-                </div> 
-                <div class="form-group">
-                    <label for="thumbs_up-field">Thumbs_up</label>
-                    <input class="form-control" type="text" name="thumbs_up" id="thumbs_up-field" value="{{ old('thumbs_up', $article->thumbs_up ) }}" />
-                </div>
+                            </ul>
+                        </div>
 
-                    <div class="well well-sm">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <a class="btn btn-link pull-right" href="{{ route('articles.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+                        <div class="12u$">
+                            <textarea name="description" placeholder="文章简介" rows="6">{{ old('description') }}</textarea>
+                        </div>
+                        <div class="12u$">
+                            <textarea name="body" class="form-control" id="editor" rows="3" placeholder="内容" required>{{ old('body') }}</textarea>
+                        </div>
+                        <div class="12u$">
+                            <ul class="actions">
+                                <li><input type="submit" value="create" /></li>
+                            </ul>
+                        </div>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
+            </section>
+        </article>
 
-@endsection
+    </div>
+@stop

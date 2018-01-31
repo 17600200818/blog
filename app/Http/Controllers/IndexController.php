@@ -14,10 +14,7 @@ class IndexController extends Controller
         //处理文章类别
         $typeArr = config('app.type');
         foreach ($list as $k => $v) {
-            $type = explode('_', $v->type);
-            $list[$k]->type1 = $typeArr[$type[0]]['name'];
-            $list[$k]->typeImg = $typeArr[$type[0]]['img'];
-            $list[$k]->type2 = $typeArr[$type[0]]['children'][$type[1]];
+            $list[$k]->getType();
         }
 
         //处理分页

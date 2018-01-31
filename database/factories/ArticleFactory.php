@@ -11,7 +11,10 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(),
         'body' => $faker->text(),
-        'type' => '0_1',
+        'type1' => '0',
+        'type2' => rand(0, 2),
+        'thumbs_up' => rand(0, 1000),
+        'is_good' => rand(0, 1),
         'description' => 'blog blog blog',
         'created_at' => $created_at,
         'updated_at' => $updated_at,

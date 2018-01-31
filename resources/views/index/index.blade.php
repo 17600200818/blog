@@ -3,30 +3,39 @@
 @section('content')
     <!-- Main -->
     <div id="main">
-
+        <!-- Intro -->
+        <section id="intro" style="text-align: center;">
+            <a href="#" class="logo"><img src="/images/logo.jpg" alt="" /></a>
+            <header>
+                <h2 style="text-indent: 10px">YTY</h2>
+                <p style="text-indent: 10px">每天都过得像样子</p>
+            </header>
+        </section>
         <!-- Post -->
         @foreach($list as $value)
             <article class="post">
                 <header>
                     <div class="title">
-                        <h2><a href="#">{{ $value->title }}</a></h2>
+                        <h2><a href="{{ route('articles.show', $value->id) }}">{{ $value->title }}</a></h2>
                         <p>{{ $value->description }}</p>
                     </div>
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">{{ $value->created_at }}</time>
-                        <a href="#" class="author"><span class="name">{{ $value->type1 }}</span><img src="images/avatar.jpg" alt="" /></a>
+                        <a href="#" class="author"><span class="name">{{ $value->type_1 }}</span><img src="images/avatar.jpg" alt="" /></a>
                     </div>
                 </header>
-                <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-                <p>{{ $value->body }}</p>
+                {{--<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>--}}
+                <div style="height: 360px;overflow:hidden;margin-bottom: 30px">
+                    <p>{!! $value->body !!}</p>
+                </div>
                 <footer>
                     <ul class="actions">
-                        <li><a href="{{ route('articles.show', $value->id) }}" class="button big">Continue Reading</a></li>
+                        <li><a href="{{ route('articles.show', $value->id) }}" class="button big">原 文</a></li>
                     </ul>
                     <ul class="stats">
-                        <li><a href="#">{{ $value->type2 }}</a></li>
-                        <li><a href="#" class="icon fa-heart">28</a></li>
-                        <li><a href="#" class="icon fa-comment">128</a></li>
+                        <li><a href="#">{{ $value->type_2 }}</a></li>
+                        <li><a href="#" class="icon fa-heart">{{ $value->thumbs_up }}</a></li>
+                        {{--<li><a href="#" class="icon fa-comment">128</a></li>--}}
                     </ul>
                 </footer>
             </article>
@@ -40,5 +49,5 @@
 
     </div>
 
-    @include('layout.sidebar')
+    {{--@include('layout.sidebar')--}}
 @stop
