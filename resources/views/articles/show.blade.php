@@ -13,14 +13,14 @@
                 </div>
                 <div class="meta">
                     <time class="published" datetime="2015-11-01">{{ $article->created_at }}</time>
-                    <a href="#" class="author"><span class="name">{{ $article->type_1 }}</span><img src="images/avatar.jpg" alt="" /></a>
+                    <a href="{{ route('articles.list', $article->type1) }}" class="author"><span class="name">{{ $article->type_1 }}</span><img src="{{ $article->typeImg }}" alt="" /></a>
                 </div>
             </header>
             <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
             {!! $article->body !!}
             <footer>
                 <ul class="stats">
-                    <li><a href="#">{{ $article->type_2 }}</a></li>
+                    <li><a href="{{ route('articles.list', [$article->type1, $article->type2]) }}">{{ $article->type_2 }}</a></li>
                     <li><a href="#" class="icon fa-heart">28</a></li>
                     {{--<li><a href="#" class="icon fa-comment">128</a></li>--}}
                 </ul>

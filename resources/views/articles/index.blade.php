@@ -5,7 +5,8 @@
     <div id="main">
         <!-- Intro -->
         <section id="intro" style="text-align: center;">
-            <a href="#" class="logo"><img src="/images/logo.jpg" alt="" /></a>
+            {{--<a href="#" class="logo"><img src="/images/logo.jpg" alt="" /></a>--}}
+            <img style="border-radius:2.5em;width: 4.5em" src="/images/logo.jpg" alt="" />
             <header>
                 <h2 style="text-indent: 10px">YTY</h2>
                 <p style="text-indent: 10px">每天都过得像样子</p>
@@ -21,7 +22,7 @@
                     </div>
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">{{ $value->created_at }}</time>
-                        <a href="{{ route('index', $k) }}" class="author"><span class="name">{{ $value->type_1 }}</span><img src="images/avatar.jpg" style="" alt="" /></a>
+                        <a href="{{ route('articles.list', $k) }}" class="author"><span class="name">{{ $value->type_1 }}</span><img src="{{ $value->typeImg }}" style="" alt="" /></a>
                     </div>
                 </header>
                 {{--<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>--}}
@@ -33,7 +34,7 @@
                         <li><a href="{{ route('articles.show', $value->id) }}" class="button big">原 文</a></li>
                     </ul>
                     <ul class="stats">
-                        <li><a href="{{ route('index', $value->type2) }}">{{ $value->type_2 }}</a></li>
+                        <li><a href="{{ route('articles.list', [$value->type1, $value->type2]) }}">{{ $value->type_2 }}</a></li>
                         <li><a href="#" class="icon fa-heart">{{ $value->thumbs_up }}</a></li>
                         {{--<li><a href="#" class="icon fa-comment">128</a></li>--}}
                     </ul>

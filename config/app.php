@@ -231,7 +231,7 @@ return [
     'type' => [
         0 => [
             'name' => 'PHP',
-            'img' => '',
+            'img' => '/images/php.jpg',
             'children' => [
                 0 => 'PHP',
                 1 => 'thinkPhp',
