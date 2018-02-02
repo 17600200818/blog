@@ -1,61 +1,53 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('content')
-<div class="container">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h1>
-                    <i class="glyphicon glyphicon-align-justify"></i> Article
-                    <a class="btn btn-success pull-right" href="{{ route('articles.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
-                </h1>
-            </div>
+    <!-- Main -->
+    <div id="main">
+        <!-- Intro -->
+        <section id="intro" style="text-align: center;">
+            <a href="#" class="logo"><img src="/images/logo.jpg" alt="" /></a>
+            <header>
+                <h2 style="text-indent: 10px">YTY</h2>
+                <p style="text-indent: 10px">每天都过得像样子</p>
+            </header>
+        </section>
+        <!-- Post -->
+        @foreach($list as $k => $value)
+            <article class="post">
+                <header>
+                    <div class="title">
+                        <h2><a href="{{ route('articles.show', $value->id) }}">{{ $value->title }}</a></h2>
+                        <p>{{ $value->description }}</p>
+                    </div>
+                    <div class="meta">
+                        <time class="published" datetime="2015-11-01">{{ $value->created_at }}</time>
+                        <a href="{{ route('index', $k) }}" class="author"><span class="name">{{ $value->type_1 }}</span><img src="images/avatar.jpg" style="" alt="" /></a>
+                    </div>
+                </header>
+                {{--<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>--}}
+                <div style="height: 200px;overflow:hidden;margin-bottom: 30px">
+                    <p>{!! $value->body !!}</p>
+                </div>
+                <footer>
+                    <ul class="actions">
+                        <li><a href="{{ route('articles.show', $value->id) }}" class="button big">原 文</a></li>
+                    </ul>
+                    <ul class="stats">
+                        <li><a href="{{ route('index', $value->type2) }}">{{ $value->type_2 }}</a></li>
+                        <li><a href="#" class="icon fa-heart">{{ $value->thumbs_up }}</a></li>
+                        {{--<li><a href="#" class="icon fa-comment">128</a></li>--}}
+                    </ul>
+                </footer>
+            </article>
+        @endforeach
+    <!-- Pagination -->
+        {{--{!! $list->render() !!}--}}
+        <ul class="actions pagination">
+            <li><a href="{{ Request::url() }}?page={{ $prePage }}" class="{{ $prePage?'':'disabled' }} button big previous">Previous Page</a></li>
+            <li><a href="{{ Request::url() }}?page={{ $nextPage }}" class="{{ $nextPage?'':'disabled' }} button big next">Next Page</a></li>
+        </ul>
 
-            <div class="panel-body">
-                @if($articles->count())
-                    <table class="table table-condensed table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th>Title</th> <th>Type_id</th> <th>Description</th> <th>Images</th> <th>Thumbs_up</th>
-                                <th class="text-right">OPTIONS</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach($articles as $article)
-                                <tr>
-                                    <td class="text-center"><strong>{{$article->id}}</strong></td>
-
-                                    <td>{{$article->title}}</td> <td>{{$article->type_id}}</td> <td>{{$article->description}}</td> <td>{{$article->images}}</td> <td>{{$article->thumbs_up}}</td>
-                                    
-                                    <td class="text-right">
-                                        <a class="btn btn-xs btn-primary" href="{{ route('articles.show', $article->id) }}">
-                                            <i class="glyphicon glyphicon-eye-open"></i> 
-                                        </a>
-                                        
-                                        <a class="btn btn-xs btn-warning" href="{{ route('articles.edit', $article->id) }}">
-                                            <i class="glyphicon glyphicon-edit"></i> 
-                                        </a>
-
-                                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete? Are you sure?');">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="_method" value="DELETE">
-
-                                            <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {!! $articles->render() !!}
-                @else
-                    <h3 class="text-center alert alert-info">Empty!</h3>
-                @endif
-            </div>
-        </div>
     </div>
-</div>
 
-@endsection
+    {{--@include('layout.sidebar')--}}
+@stop

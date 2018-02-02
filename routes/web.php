@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'IndexController@index')->name('index');
-Route::resource('articles', 'ArticlesController');
+Route::get('/articles/list/{type1?}/{type2?}', 'ArticlesController@index')->name('articles.list');
+Route::resource('articles', 'ArticlesController', ['only' => ['index', 'create', 'store', 'show']]);
 Route::post('upload_image', 'ArticlesController@uploadImage')->name('articles.upload_image');

@@ -12,7 +12,7 @@
             </header>
         </section>
         <!-- Post -->
-        @foreach($list as $value)
+        @foreach($list as $k => $value)
             <article class="post">
                 <header>
                     <div class="title">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">{{ $value->created_at }}</time>
-                        <a href="#" class="author"><span class="name">{{ $value->type_1 }}</span><img src="images/avatar.jpg" alt="" /></a>
+                        <a href="{{ route('index', $k) }}" class="author"><span class="name">{{ $value->type_1 }}</span><img src="images/avatar.jpg" alt="" /></a>
                     </div>
                 </header>
                 {{--<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>--}}
@@ -33,7 +33,7 @@
                         <li><a href="{{ route('articles.show', $value->id) }}" class="button big">原 文</a></li>
                     </ul>
                     <ul class="stats">
-                        <li><a href="#">{{ $value->type_2 }}</a></li>
+                        <li><a href="{{ route('index', $value->type2) }}">{{ $value->type_2 }}</a></li>
                         <li><a href="#" class="icon fa-heart">{{ $value->thumbs_up }}</a></li>
                         {{--<li><a href="#" class="icon fa-comment">128</a></li>--}}
                     </ul>
@@ -43,8 +43,8 @@
     <!-- Pagination -->
         {{--{!! $list->render() !!}--}}
         <ul class="actions pagination">
-            <li><a href="http://blog.heixiuheixiu.cn/?page={{ $prePage }}" class="{{ $prePage?'':'disabled' }} button big previous">Previous Page</a></li>
-            <li><a href="http://blog.heixiuheixiu.cn/?page={{ $nextPage }}" class="{{ $nextPage?'':'disabled' }} button big next">Next Page</a></li>
+            <li><a href="{{ Request::getRequestUri() }}?page={{ $prePage }}" class="{{ $prePage?'':'disabled' }} button big previous">Previous Page</a></li>
+            <li><a href="{{ Request::getRequestUri() }}?page={{ $nextPage }}" class="{{ $nextPage?'':'disabled' }} button big next">Next Page</a></li>
         </ul>
 
     </div>

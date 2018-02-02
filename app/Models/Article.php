@@ -14,4 +14,29 @@ class Article extends Model
         $this->typeImg = $typeArr[$this->type1]['img'];
         $this->type_2 = $typeArr[$this->type1]['children'][$this->type2];
     }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('title', 'like', '%'.$search.'%');
+        }else {
+            return $query;
+        }
+    }
+
+    public function scopeType($query, $type1, $type2)
+    {
+        $where = [];
+        if ($type1) {
+            $where['type1'] = $type1;
+        }
+        if ($type2) {
+            $where['type2'] = $type2;
+        }
+        if (!empty($where)) {
+            return $query->where($where);
+        }else {
+            return $query;
+        }
+    }
 }

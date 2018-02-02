@@ -2,8 +2,8 @@
     <h1><a href="{{ route('index') }}">YTY</a></h1>
     <nav class="links">
         <ul>
-            @foreach( config('app.type') as $type )
-            <li><a href="#">{{ $type['name'] }}</a></li>
+            @foreach( config('app.type') as $k => $type )
+            <li><a href="{{ route('articles.list', $k) }}">{{ $type['name'] }}</a></li>
             @endforeach
         </ul>
     </nav>

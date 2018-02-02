@@ -17,7 +17,7 @@
                 </div>
             </header>
             <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-            {{ $article->body }}
+            {!! $article->body !!}
             <footer>
                 <ul class="stats">
                     <li><a href="#">{{ $article->type_2 }}</a></li>
